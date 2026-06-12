@@ -1,4 +1,4 @@
-import ProductCampaignList from './components/ProductCampaignList'
+import ProductCampaignList from './components/CampaignHome'
 import './styles/App.scss'
 
 function App() {

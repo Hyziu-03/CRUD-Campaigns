@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
-import db from "../Firebase-init";
+import db from "../../Firebase-init";
 import { collection, addDoc } from "firebase/firestore";
-import CampaignBoardHeader from "./CampaignBoardHeader";
+import CampaignBoardHeader from "../Board/CampaignBoardHeader";
 import { useEffect, useState } from 'react'
 import { onSnapshot } from 'firebase/firestore'
-import CampaignBoardMeta from "./CampaignBoardMeta"; 
+import CampaignBoardMeta from "../Board/CampaignBoardMeta";
 
 function CreateCampaign() {
     async function handleSubmit(event) {
@@ -46,7 +46,7 @@ function CreateCampaign() {
         <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">
             <CampaignBoardHeader />
 
-            <CampaignBoardMeta/>
+            <CampaignBoardMeta />
 
             <form className="campaign-board__form" onSubmit={handleSubmit}>
                 <label>

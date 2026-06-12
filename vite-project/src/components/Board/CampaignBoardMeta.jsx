@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
-import db from '../Firebase-init'
+import db from '../../Firebase-init'
 
 export default function CampaignBoardMeta() {
     const [campaigns, setCampaigns] = useState([])

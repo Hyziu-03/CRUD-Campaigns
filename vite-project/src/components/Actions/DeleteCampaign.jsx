@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
-import db from '../Firebase-init'
-import CampaignBoardHeader from './CampaignBoardHeader'
+import db from '../../Firebase-init'
+import CampaignBoardHeader from '../Board/CampaignBoardHeader'
 import { doc, deleteDoc } from "firebase/firestore";
-import CampaignBoardMeta from './CampaignBoardMeta';
+import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 
 function ProductCampaignList() {
     const [campaigns, setCampaigns] = useState([])
@@ -51,7 +51,7 @@ function ProductCampaignList() {
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
             <CampaignBoardHeader />
 
-            <CampaignBoardMeta/>
+            <CampaignBoardMeta />
 
 
             <section>
