@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import db from "../../Firebase-init";
 import { collection, addDoc } from "firebase/firestore";
 import CampaignBoardHeader from "../Board/CampaignBoardHeader";
@@ -10,8 +9,6 @@ function CreateCampaign() {
     async function handleSubmit(event) {
         const formData = new FormData(event.currentTarget);
         const submittedData = Object.fromEntries(formData.entries());
-
-        console.log(submittedData);
 
         try {
             const docRef = await addDoc(collection(db, "campaigns"), submittedData);
@@ -41,7 +38,7 @@ function CreateCampaign() {
     }, [])
 
     console.log(campaigns)
-
+    
     return (
         <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">
             <CampaignBoardHeader />

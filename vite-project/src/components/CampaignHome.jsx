@@ -25,8 +25,6 @@ function CampaignHome() {
         return () => unsubscribe()
     }, [])
 
-    console.log(campaigns)
-
     return (
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
             <CampaignBoardHeader />
