@@ -53,3 +53,5 @@ function ProductCampaignList({ campaigns = [] }) {
 }
 
 export default ProductCampaignList
+
+// get data from firestore and display in the list locally 
