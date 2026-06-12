@@ -6,6 +6,7 @@ import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 
 function ProductCampaignList() {
     const [campaigns, setCampaigns] = useState([]);
+    const [towns, setTowns] = useState([]);
     const [selectedCampaignId, setSelectedCampaignId] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);  
 
@@ -21,6 +22,18 @@ function ProductCampaignList() {
         return () => unsubscribe();
     }, []);
 
+    useEffect(() => {
+        const townsRef = collection(db, 'towns');
+        const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
+            const townList = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setTowns(townList);
+        });
+        return () => unsubscribe();
+    }, []);
+
     const handleEditForm = () => { 
         const selectedRadio = document.querySelector('input[name="campaign"]:checked');
 
@@ -28,7 +41,7 @@ function ProductCampaignList() {
         setShowEditForm(true);
     }
 
-    const handleEditCampaign = (    ) => {
+    const handleEditCampaign = () => {
         const inputFields = document.querySelectorAll(".campaign-board__edit-input");
 
         for(let i = 0; i < inputFields.length; i++) {
@@ -121,7 +134,18 @@ function ProductCampaignList() {
                                     Current town: {selectedCampaign.town}
                                 </p>
                                 New town (leave blank to keep current value):
-                                <input type="text" name="town" placeholder="Springfield" required className="campaign-board__edit-input" />
+                                <select
+                                    name="town"
+                                    defaultValue={selectedCampaign.town}
+                                    required
+                                    className="campaign-board__edit-input"
+                                >
+                                    {towns.map((town) => (
+                                        <option key={town.name} value={town.name}>
+                                            {town.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </label>
 
                             <label>
