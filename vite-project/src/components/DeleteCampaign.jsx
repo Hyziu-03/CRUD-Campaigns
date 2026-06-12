@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
 import db from '../Firebase-init'
 import CampaignBoardHeader from './CampaignBoardHeader'
-import CampaignBoardMeta from './CampaignBoardMeta'; 
+import { doc, deleteDoc } from "firebase/firestore";
+import CampaignBoardMeta from './CampaignBoardMeta';
 
 function ProductCampaignList() {
     const [campaigns, setCampaigns] = useState([])
@@ -26,34 +27,45 @@ function ProductCampaignList() {
 
     console.log(campaigns)
 
+    async function handleDeleteCampaign() {
+        event.preventDefault();
+
+        const selectedRadio = document.querySelector('input[name="campaign"]:checked');
+        if (!selectedRadio) {
+            alert("Please select a campaign to delete.");
+            return;
+        }
+
+        const targetCampaignId = selectedRadio.id;
+
+        try {
+            await deleteDoc(doc(db, "campaigns", targetCampaignId));
+            console.log("Document deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+            alert("Failed to delete campaign.");
+        }
+    }
+
     return (
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
             <CampaignBoardHeader />
 
             <CampaignBoardMeta/>
 
-            <section className="campaign-board__options">
-                <button className="campaign-board__option" type="button">
-                    <a className="campaign-board__option" href="/create-campaign">Create campaign</a>
-                </button>
-                <button className="campaign-board__option" type="button">Edit campaign</button>
-                <button className="campaign-board__option" type="button"><a className="campaign-board__option" href="/delete-campaign">Delete campaign</a></button>
-            </section>
 
             <section>
                 {campaigns.length > 0 ? (
                     <ul className="campaign-list">
                         {campaigns.map((campaign) => (
                             <li key={campaign.id} className="campaign-card">
-                                <h2 className="campaign-card__name">{campaign.name}</h2>
-                                <p className="campaign-card__keywords">
-                                    Keywords: {campaign.keywords.split(" ").join(", ")}
-                                </p>
-                                <p className="campaign-card__bid-amount">Bid amount: {campaign.bidAmount}</p>
-                                <p className="campaign-card__fund">Fund: {campaign.fund}</p>
-                                <p className="campaign-card__status">Status: {campaign.status}</p>
-                                <p className="campaign-card__town">Town: {campaign.town}</p>
-                                <p className="campaign-card__radius">Radius: {campaign.radius} km</p>
+                                <input
+                                    type="radio"
+                                    name="campaign"
+                                    className="campaign-card__name"
+                                    id={campaign.id}
+                                />
+                                <label htmlFor={campaign.id}>{campaign.name}</label>
                             </li>
                         ))}
                     </ul>
@@ -64,6 +76,16 @@ function ProductCampaignList() {
                     </div>
                 )}
             </section>
+
+            <div className="campaign-board__form-actions">
+                <button className="campaign-board__option" type="button"><a className="campaign-board__option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
+
+                <button>
+                    <a className="campaign-board__option" href="/view-campaigns">
+                        Cancel
+                    </a>
+                </button>
+            </div>
         </section>
     )
 }

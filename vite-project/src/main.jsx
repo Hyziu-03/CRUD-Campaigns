@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter, Routes, Route } from "react-router";
 import CreateCampaign from './components/CreateCampaign.jsx';
-
+import DeleteCampaign from './components/DeleteCampaign.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -12,6 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/view-campaigns" element={<App />} />
         <Route path="/create-campaign" element={<CreateCampaign />} />
+        <Route path="/delete-campaign" element={<DeleteCampaign />} />
         <Route path="/" element={<App />} />
       </Routes>
     </BrowserRouter>
