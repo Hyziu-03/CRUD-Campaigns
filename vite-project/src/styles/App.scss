@@ -1,0 +1,22 @@
+$baseFontSize: 16px;
+$black: #333;
+$white: #f0f0f0;
+$fontFamily: Arial, sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $fontFamily;
+  background-color: $white;
+  color: $black;
+  font-size: $baseFontSize;
+}
+
+.campaign-board__form {
+  display: flex;
+  flex-direction: column;
+}

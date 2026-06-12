@@ -1,5 +1,5 @@
 import ProductCampaignList from './components/ProductCampaignList'
-import './styles/App.css'
+import './styles/App.scss'
 
 function App() {
   const campaigns = [
