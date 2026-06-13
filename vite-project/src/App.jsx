@@ -1,5 +1,5 @@
 import ProductCampaignList from './components/CampaignHome'
-import './styles/App.scss'
+import './styles/Global/App.scss'
 
 function App() {
   return (

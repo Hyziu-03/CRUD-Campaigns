@@ -97,7 +97,7 @@ function ProductCampaignList() {
                                     id={campaign.id}
                                     onChange={() => handleEditForm(campaign.id)}
                                 />
-                                <label htmlFor={campaign.id} classname="campaign-form-label">{campaign.name}</label>
+                                <label htmlFor={campaign.id} classname="campaign-list-selection">{campaign.name}</label>
                             </li>
                         ))}
                     </ul>
@@ -115,22 +115,20 @@ function ProductCampaignList() {
 
                         <form className="campaign-board__form">
                             <label>
-                                <p className="campaign-form-label">
+                                <p className="campaign-list-selection">
                                     Current name: {selectedCampaign.name}
                                 </p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection__edit">
                                     New name (leave blank to keep current value):
-
-
                                 </p>
                                 <input type="text" name="name" placeholder="Spring launch push" required className="campaign-form__input" />
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">
+                                <p className="campaign-list-selection">
                                     Current keywords: {selectedCampaign.keywords.split(" ").join(", ")}
                                 </p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection__edit">
                                     New keywords (leave blank to keep current value):
                                 </p>
                                 <input
@@ -145,10 +143,10 @@ function ProductCampaignList() {
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">
+                                <p className="campaign-list-selection">
                                     Current bid amount: {selectedCampaign.bidAmount}
                                 </p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection__edit">
 
                                     New bid amount (leave blank to keep current value):
 
@@ -157,21 +155,21 @@ function ProductCampaignList() {
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">
+                                <p className="campaign-list-selection">
                                     Current fund: {selectedCampaign.fund}
                                 </p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection__edit">
 
-                                New fund (leave blank to keep current value):
+                                    New fund (leave blank to keep current value):
                                 </p>
                                 <input type="number" name="fund" placeholder="5000" required className="campaign-form__input" />
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">
+                                <p className="campaign-list-selection">
                                     Current town: {selectedCampaign.town}
                                 </p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection__edit">
 
                                     New town (leave blank to keep current value):
                                 </p>
@@ -190,18 +188,18 @@ function ProductCampaignList() {
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">Current radius: {selectedCampaign.radius}</p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection">Current radius: {selectedCampaign.radius}</p>
+                                <p className="campaign-list-selection__edit">
                                     New radius (leave blank to keep current value):
                                 </p>
                                 <input type="number" name="radius" placeholder="10" required className="campaign-form__input" />
                             </label>
 
                             <label>
-                                <p className="campaign-form-label">Current status: {selectedCampaign.status}</p>
-                                <p className="campaign-form-label__edit">
+                                <p className="campaign-list-selection">Current status: {selectedCampaign.status}</p>
+                                <p className="campaign-list-selection__edit">
 
-                                New status:
+                                    New status:
                                 </p>
                                 <select name="status" defaultValue="scheduled" required className="campaign-form__input">
                                     <option value="on">On</option>

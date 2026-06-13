@@ -1,8 +1,4 @@
-$baseFontSize: 16px;
-$black: #333;
-$white: #f0f0f0;
-$gray: #808080;
-$fontFamily: Arial, sans-serif;
+@import "../variables.scss";
 
 /* Campaign Board Header */
 
@@ -11,10 +7,19 @@ $fontFamily: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: #2a7b9b;
+  background: linear-gradient(
+    90deg,
+    rgba(42, 123, 155, 1) 0%,
+    rgba(87, 199, 133, 1) 50%,
+    rgba(237, 221, 83, 1) 100%
+  );
+  color: $white;
+  margin-bottom: 1rem;
 }
 
 .campaign-board__eyebrow {
-  color: $gray;
+  color: $white;
   text-transform: uppercase;
 }
 
@@ -24,6 +29,11 @@ $fontFamily: Arial, sans-serif;
   padding-left: 2rem;
   font-weight: bold;
 }
+
+.campaign-meta__divider {
+  margin: 2rem 0 0 2rem;
+}
+
 
 /* Campaign Board Options */
 
@@ -63,10 +73,8 @@ $fontFamily: Arial, sans-serif;
   border-radius: 2rem;
   border: 1px solid $black;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-@media (max-width: 768px) {
-  .campaign-card {
+  @media (max-width: 768px) {
     max-width: 66vw;
     min-width: 50vw;
   }
@@ -74,7 +82,7 @@ $fontFamily: Arial, sans-serif;
 
 .campaign-list {
   display: flex;
-  
+  overflow-x: scroll;
 }
 
 .campaign-list-selection {
@@ -84,9 +92,5 @@ $fontFamily: Arial, sans-serif;
   margin-left: 2rem;
   margin-top: 2rem;
   padding: 1rem;
-  margin: 2rem 0 0 2rem;
-}
-
-.campaign-meta__divider {
   margin: 2rem 0 0 2rem;
 }

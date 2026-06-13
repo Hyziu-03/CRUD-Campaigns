@@ -134,7 +134,7 @@ function CampaignForm() {
 
     return (
         <form className="campaign-board__form" onSubmit={handleSubmit} noValidate>
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
                 Campaign name:
                 <input
                     type="text"
@@ -147,7 +147,7 @@ function CampaignForm() {
                 {errors.name && <span className="error-message">{errors.name}</span>}
             </label>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Keywords:
                 <input
@@ -168,7 +168,7 @@ function CampaignForm() {
                 ))}
             </datalist>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Bid amount:
                 <input
@@ -185,7 +185,7 @@ function CampaignForm() {
                 {errors.bidAmount && <span className="error-message">{errors.bidAmount}</span>}
             </label>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Fund:
                 <input
@@ -202,7 +202,7 @@ function CampaignForm() {
                 {errors.fund && <span className="error-message">{errors.fund}</span>}
             </label>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Town:
                 <select
@@ -223,7 +223,7 @@ function CampaignForm() {
                 {errors.town && <span className="error-message">{errors.town}</span>}
             </label>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Radius (km):
                 <input
@@ -239,7 +239,7 @@ function CampaignForm() {
                 {errors.radius && <span className="error-message">{errors.radius}</span>}
             </label>
 
-            <label className="campaign-form-label">
+            <label className="campaign-list-selection">
 
                 Status:
                 <select

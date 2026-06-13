@@ -30,11 +30,13 @@ function CreateCampaign() {
     return (
         <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">
             <CampaignBoardHeader />
-            <CampaignBoardMeta />
+            <main className="campaign-board__main">
+                <CampaignBoardMeta />
 
-            <p className="campaign-meta__divider">Enter data to add a campaign:</p>
+                <p className="campaign-meta__divider">Enter data to add a campaign:</p>
 
-            <CampaignForm />
+                <CampaignForm />
+            </main>
         </section>
     )
 }
