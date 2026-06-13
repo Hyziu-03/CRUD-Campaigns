@@ -64,6 +64,19 @@ function ProductCampaignList() {
     }
 
     const selectedCampaign = getSelectedCampaign();
+    const keywordSuggestions = Array.from(
+        new Set(
+            campaigns.flatMap((campaign) => {
+                const keywords = campaign.keywords ?? '';
+                const keywordArray = Array.isArray(keywords)
+                    ? keywords
+                    : String(keywords).split(',');
+                return keywordArray
+                    .map((keyword) => String(keyword).trim())
+                    .filter(Boolean);
+            })
+        )
+    );
 
     return (
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
@@ -120,7 +133,15 @@ function ProductCampaignList() {
                                 <p className="campaign-form-label__edit">
                                     New keywords (leave blank to keep current value):
                                 </p>
-                                <input type="text" name="keywords" placeholder="summer launch bundle" required className="campaign-form__input" />
+                                <input
+                                    type="text"
+                                    name="keywords"
+                                    placeholder="summer launch bundle"
+                                    defaultValue={selectedCampaign?.keywords ?? ''}
+                                    required
+                                    className="campaign-form__input"
+                                    list="keyword-suggestions"
+                                />
                             </label>
 
                             <label>
@@ -189,6 +210,11 @@ function ProductCampaignList() {
                             </label>
 
                         </form>
+                        <datalist id="keyword-suggestions">
+                            {keywordSuggestions.map((keyword) => (
+                                <option key={keyword} value={keyword} />
+                            ))}
+                        </datalist>
 
                     </ul>}
                 </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 function CampaignForm() {
     const [towns, setTowns] = useState([]);
+    const [campaigns, setCampaigns] = useState([]);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -36,6 +37,29 @@ function CampaignForm() {
         });
         return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+        const campaignsRef = collection(db, 'campaigns');
+        const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
+            const campaignList = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setCampaigns(campaignList);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const keywordSuggestions = Array.from(
+        new Set(
+            campaigns.flatMap((campaign) =>
+                String(campaign.keywords ?? '')
+                    .split(/[\s,]+/)
+                    .map((keyword) => keyword.trim())
+                    .filter(Boolean)
+            )
+        )
+    );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -133,10 +157,16 @@ function CampaignForm() {
                     value={formData.keywords}
                     onChange={handleChange}
                     className="campaign-form__input"
+                    list="keyword-suggestions"
 
                 />
                 {errors.keywords && <span className="error-message">{errors.keywords}</span>}
             </label>
+            <datalist id="keyword-suggestions">
+                {keywordSuggestions.map((keyword) => (
+                    <option key={keyword} value={keyword} />
+                ))}
+            </datalist>
 
             <label className="campaign-form-label">
 
