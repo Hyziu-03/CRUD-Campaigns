@@ -65,9 +65,9 @@ function CampaignForm() {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
 
-        if (errors[name]) {
+        if (errors[name])
             setErrors(prev => ({ ...prev, [name]: '' }));
-        }
+
     };
 
     const validateForm = () => {
@@ -124,7 +124,7 @@ function CampaignForm() {
         try {
             if (validateForm()) {
                 const docRef = await addDoc(collection(db, "campaigns"), formData);
-                console.log("Document written with ID: ", docRef.id);
+                alert("Document written with ID: ", docRef.id);
                 window.location.reload();
             }
         } catch (e) {
@@ -210,7 +210,7 @@ function CampaignForm() {
                     value={formData.town}
                     onChange={handleChange}
                     required
-                                        className="campaign-form__input"
+                    className="campaign-form__input"
 
                 >
                     <option value="">Select a town</option>
@@ -256,7 +256,7 @@ function CampaignForm() {
 
             <div className="campaign-board__options ">
                 <button type="submit" id="campaign-form__submit">
-                    <a href="" className="campaign-board__option"  onClick={handleSubmit}>
+                    <a href="" className="campaign-board__option" onClick={handleSubmit}>
                         Save campaign
                     </a>
                 </button>

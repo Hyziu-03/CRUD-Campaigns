@@ -6,6 +6,7 @@ import CampaignBoardMeta from "../Board/CampaignBoardMeta";
 import CampaignForm from "../CampaignForm";
 
 function CreateCampaign() {
+    // eslint-disable-next-line no-unused-vars
     const [campaigns, setCampaigns] = useState([])
 
     useEffect(() => {
@@ -24,8 +25,6 @@ function CreateCampaign() {
 
         return () => unsubscribe()
     }, [])
-
-    console.log(campaigns)
 
     return (
         <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">

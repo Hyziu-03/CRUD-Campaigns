@@ -25,8 +25,6 @@ function ProductCampaignList() {
         return () => unsubscribe()
     }, [])
 
-    console.log(campaigns)
-
     async function handleDeleteCampaign() {
         event.preventDefault();
 
@@ -40,7 +38,7 @@ function ProductCampaignList() {
 
         try {
             await deleteDoc(doc(db, "campaigns", targetCampaignId));
-            console.log("Document deleted successfully!");
+            alert("Document deleted successfully!");
         } catch (error) {
             console.error("Error deleting document: ", error);
             alert("Failed to delete campaign.");

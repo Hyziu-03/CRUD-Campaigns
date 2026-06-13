@@ -25,8 +25,6 @@ export default function CampaignBoardList() {
         return () => unsubscribe()
     }, [])
 
-    console.log(campaigns)
-
     return (
         <section>
             {campaigns.length > 0 ? (
