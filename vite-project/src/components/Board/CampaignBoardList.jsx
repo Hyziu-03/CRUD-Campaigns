@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
 import db from '../../Firebase-init'
+import '../../styles/Board/Board.scss';
+
 
 export default function CampaignBoardList() {
 
@@ -31,15 +33,13 @@ export default function CampaignBoardList() {
                 <ul className="campaign-list">
                     {campaigns.map((campaign) => (
                         <li key={campaign.id} className="campaign-card">
-                            <h2 className="campaign-card__name">{campaign.name}</h2>
-                            <p className="campaign-card__keywords">
-                                Keywords: {campaign.keywords.split(" ").join(", ")}
-                            </p>
-                            <p className="campaign-card__bid-amount">Bid amount: {campaign.bidAmount}</p>
-                            <p className="campaign-card__fund">Fund: {campaign.fund}</p>
-                            <p className="campaign-card__status">Status: {campaign.status}</p>
-                            <p className="campaign-card__town">Town: {campaign.town}</p>
-                            <p className="campaign-card__radius">Radius: {campaign.radius} km</p>
+                            <h2>{campaign.name}</h2>
+                            <p>Keywords: {campaign.keywords.split(" ").join(", ")}</p>
+                            <p>Bid amount: {campaign.bidAmount}</p>
+                            <p>Fund: {campaign.fund}</p>
+                            <p>Status: {campaign.status}</p>
+                            <p>Town: {campaign.town}</p>
+                            <p>Radius: {campaign.radius} km</p>
                         </li>
                     ))}
                 </ul>
