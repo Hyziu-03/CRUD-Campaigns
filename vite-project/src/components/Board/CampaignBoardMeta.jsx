@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
 import db from '../../Firebase-init'
+import '../../styles/Board/Board.scss';
 
 export default function CampaignBoardMeta() {
     const [campaigns, setCampaigns] = useState([])
@@ -28,8 +29,7 @@ export default function CampaignBoardMeta() {
 
     return (
         <div className="campaign-board__meta" aria-label="Campaign overview">
-            <span className="campaign-board__meta-label">Campaigns: </span>
-            <span className="campaign-board__meta-value">{campaigns.length}</span>
+            Campaigns in general: {campaigns.length}
         </div>
     )
 }

@@ -53,12 +53,15 @@ function ProductCampaignList() {
 
             <CampaignBoardMeta />
 
+            
+
+            <p className="campaign-meta__divider">Choose campaign to delete:</p>
 
             <section>
                 {campaigns.length > 0 ? (
                     <ul className="campaign-list">
                         {campaigns.map((campaign) => (
-                            <li key={campaign.id} className="campaign-card">
+                            <li key={campaign.id} className="campaign-list-selection">
                                 <input
                                     type="radio"
                                     name="campaign"
@@ -72,13 +75,13 @@ function ProductCampaignList() {
                 ) : (
                     <div className="campaign-empty">
                         <h2>No campaigns yet</h2>
-                        <p>Firestore returned an empty campaigns collection.</p>
+                        <p >Firestore returned an empty campaigns collection.</p>
                     </div>
                 )}
             </section>
 
-            <div className="campaign-board__form-actions">
-                <button className="campaign-board__option" type="button"><a className="campaign-board__option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
+            <div className="campaign-board__options ">
+                <button><a className="campaign-board__option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
 
                 <button>
                     <a className="campaign-board__option" href="/view-campaigns">

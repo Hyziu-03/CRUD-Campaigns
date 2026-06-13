@@ -4,6 +4,7 @@ import db from '../Firebase-init'
 import CampaignBoardHeader from './Board/CampaignBoardHeader'
 import CampaignBoardMeta from './Board/CampaignBoardMeta';
 import CampaignBoardList from './Board/CampaignBoardList';
+import CampaignBoardOptions from './Board/CampaignBoardOptions';
 
 function CampaignHome() {
     const [campaigns, setCampaigns] = useState([])
@@ -31,15 +32,12 @@ function CampaignHome() {
 
             <CampaignBoardMeta/>
 
-            <section className="campaign-board__options">
-                <button className="campaign-board__option" type="button">
-                    <a className="campaign-board__option" href="/create-campaign">Create campaign</a>
-                </button>
-                <button className="campaign-board__option" type="button"><a className="campaign-board__option" href="/edit-campaign">Edit campaign</a></button>
-                <button className="campaign-board__option" type="button"><a className="campaign-board__option" href="/delete-campaign">Delete campaign</a></button>
-            </section>
+            <p className="campaign-meta__divider">Here are your campaigns:</p>
 
             <CampaignBoardList campaigns={campaigns} />
+
+            <CampaignBoardOptions />
+
         </section>
     )
 }

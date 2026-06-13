@@ -31,6 +31,9 @@ function CreateCampaign() {
         <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">
             <CampaignBoardHeader />
             <CampaignBoardMeta />
+
+            <p className="campaign-meta__divider">Enter data to add a campaign:</p>
+
             <CampaignForm />
         </section>
     )

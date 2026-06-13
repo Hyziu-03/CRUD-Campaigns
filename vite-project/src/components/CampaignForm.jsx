@@ -97,13 +97,11 @@ function CampaignForm() {
     async function handleSubmit(event) {
         event.preventDefault();
 
-        const formData = new FormData(event.currentTarget);
-        const submittedData = Object.fromEntries(formData.entries());
-
         try {
             if (validateForm()) {
-                const docRef = await addDoc(collection(db, "campaigns"), submittedData);
+                const docRef = await addDoc(collection(db, "campaigns"), formData);
                 console.log("Document written with ID: ", docRef.id);
+                window.location.reaload();
             }
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -112,34 +110,37 @@ function CampaignForm() {
 
     return (
         <form className="campaign-board__form" onSubmit={handleSubmit} noValidate>
-            <label>
-                Campaign name
+            <label className="campaign-form-label">
+                Campaign name:
                 <input
                     type="text"
                     name="name"
                     placeholder="Spring launch push"
                     value={formData.name}
                     onChange={handleChange}
-                    className={errors.name ? 'error' : ''}
+                    className="campaign-form__input"
                 />
                 {errors.name && <span className="error-message">{errors.name}</span>}
             </label>
 
-            <label>
-                Keywords
+            <label className="campaign-form-label">
+
+                Keywords:
                 <input
                     type="text"
                     name="keywords"
                     placeholder="summer launch bundle"
                     value={formData.keywords}
                     onChange={handleChange}
-                    className={errors.keywords ? 'error' : ''}
+                    className="campaign-form__input"
+
                 />
                 {errors.keywords && <span className="error-message">{errors.keywords}</span>}
             </label>
 
-            <label>
-                Bid amount
+            <label className="campaign-form-label">
+
+                Bid amount:
                 <input
                     type="number"
                     name="bidAmount"
@@ -148,13 +149,15 @@ function CampaignForm() {
                     onChange={handleChange}
                     min="0.01"
                     step="0.01"
-                    className={errors.bidAmount ? 'error' : ''}
+                    className="campaign-form__input"
+
                 />
                 {errors.bidAmount && <span className="error-message">{errors.bidAmount}</span>}
             </label>
 
-            <label>
-                Fund
+            <label className="campaign-form-label">
+
+                Fund:
                 <input
                     type="number"
                     name="fund"
@@ -163,19 +166,22 @@ function CampaignForm() {
                     onChange={handleChange}
                     min="0.01"
                     step="0.01"
-                    className={errors.fund ? 'error' : ''}
+                    className="campaign-form__input"
+
                 />
                 {errors.fund && <span className="error-message">{errors.fund}</span>}
             </label>
 
-            <label>
-                Town
+            <label className="campaign-form-label">
+
+                Town:
                 <select
                     name="town"
                     value={formData.town}
                     onChange={handleChange}
                     required
-                    className={`campaign-board__edit-input ${errors.town ? 'error' : ''}`}
+                                        className="campaign-form__input"
+
                 >
                     <option value="">Select a town</option>
                     {towns.map((town) => (
@@ -187,8 +193,9 @@ function CampaignForm() {
                 {errors.town && <span className="error-message">{errors.town}</span>}
             </label>
 
-            <label>
-                Radius (km)
+            <label className="campaign-form-label">
+
+                Radius (km):
                 <input
                     type="number"
                     name="radius"
@@ -197,18 +204,19 @@ function CampaignForm() {
                     onChange={handleChange}
                     min="1"
                     step="1"
-                    className={errors.radius ? 'error' : ''}
+                    className="campaign-form__input"
                 />
                 {errors.radius && <span className="error-message">{errors.radius}</span>}
             </label>
 
-            <label>
-                Status
+            <label className="campaign-form-label">
+
+                Status:
                 <select
                     name="status"
                     value={formData.status}
                     onChange={handleChange}
-                    className={errors.status ? 'error' : ''}
+                    className="campaign-form__input"
                 >
                     <option value="on">On</option>
                     <option value="off">Off</option>
@@ -216,9 +224,11 @@ function CampaignForm() {
                 {errors.status && <span className="error-message">{errors.status}</span>}
             </label>
 
-            <div className="campaign-board__form-actions">
-                <button className="campaign-board__form-options" type="submit">
-                    Save campaign
+            <div className="campaign-board__options ">
+                <button type="submit" id="campaign-form__submit">
+                    <a href="" className="campaign-board__option"  onClick={handleSubmit}>
+                        Save campaign
+                    </a>
                 </button>
                 <button>
                     <a className="campaign-board__option" href="/view-campaigns">
