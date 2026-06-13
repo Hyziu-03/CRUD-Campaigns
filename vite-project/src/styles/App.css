@@ -33,15 +33,22 @@ button {
 .campaign-form__input {
   font-size: 1rem;
   padding: 0.5rem;
-  margin: 0.5rem 2rem;
+  margin: 0.5rem 2rem 0.5rem 0;
+  display: flex;
+  align-self: flex-end;
+  width: 20vw;
 }
 
-.campaign-form-label, .campaign-form-label__edit {
+.campaign-form-label,
+.campaign-form-label__edit {
   margin-left: 2rem;
 }
 
-.campaign-form-label {
-  margin-top: 1.5rem;
+.campaign-list-selection {
+  display: flex;
+  max-width: 20vw;
+  margin-top: 1rem;
+  align-items: center;
 }
 
 .campaign-form-label__edit {
@@ -58,11 +65,12 @@ button {
   margin: 5rem 0 0 2rem;
 }
 
-@media (max-width: 501px) {
+@media (max-width: 768px) {
   .campaign-form__input {
-    max-width: 80vw;
+    width: 80vw;
   }
-  .campaign-form-label, .campaign-form-label__edit {
+  .campaign-form-label,
+  .campaign-form-label__edit {
     display: flex;
     flex-direction: column;
     margin: 0 2rem;

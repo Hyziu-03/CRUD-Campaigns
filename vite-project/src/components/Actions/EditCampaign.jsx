@@ -98,7 +98,7 @@ function ProductCampaignList() {
 
             {showEditForm && selectedCampaignId && (
                 <div>
-                    {<ul className="campaign-list">
+                    {<ul className="campaign-list campaign-list__edit">
 
                         <form className="campaign-board__form">
                             <label>

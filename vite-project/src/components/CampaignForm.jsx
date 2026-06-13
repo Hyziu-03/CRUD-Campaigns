@@ -101,7 +101,7 @@ function CampaignForm() {
             if (validateForm()) {
                 const docRef = await addDoc(collection(db, "campaigns"), formData);
                 console.log("Document written with ID: ", docRef.id);
-                window.location.reaload();
+                window.location.reload();
             }
         } catch (e) {
             console.error("Error adding document: ", e);
