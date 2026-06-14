@@ -1,10 +1,8 @@
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import db from "../Firebase-init";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
-function CampaignForm() {
-    const [towns, setTowns] = useState([]);
-    const [campaigns, setCampaigns] = useState([]);
+function CampaignForm({ towns = [], campaigns = [] }) {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -25,39 +23,6 @@ function CampaignForm() {
         radius: '',
         status: ''
     });
-
-    useEffect(() => {
-        try {
-            const townsRef = collection(db, 'towns');
-            const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
-                const townList = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setTowns(townList);
-            });
-            return () => unsubscribe();
-        } catch (error) {
-            console.error('Error fetching towns:', error);
-        }
-
-    }, []);
-
-    useEffect(() => {
-        try {
-            const campaignsRef = collection(db, 'campaigns');
-            const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
-                const campaignList = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setCampaigns(campaignList);
-            });
-            return () => unsubscribe();
-        } catch (error) {
-            console.error('Error fetching campaigns:', error);
-        }
-    }, []);
 
     const keywordSuggestions = Array.from(
         new Set(
@@ -83,7 +48,7 @@ function CampaignForm() {
         }
     };
 
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         try {
             let valid = true;
             const newErrors = { ...errors };
@@ -133,7 +98,7 @@ function CampaignForm() {
             console.error('Validation error:', error);
             return false;
         }
-    };
+    }, [formData, errors]);
 
 
     async function handleSubmit(event) {

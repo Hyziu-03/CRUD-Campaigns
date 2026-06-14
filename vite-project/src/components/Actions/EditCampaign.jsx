@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import db from '../../Firebase-init';
 import CampaignBoardHeader from '../Board/CampaignBoardHeader';
@@ -53,7 +53,7 @@ function ProductCampaignList() {
         }
     }
 
-    const handleEditCampaign = () => {
+    const handleEditCampaign = useCallback(() => {
         try {
             event.preventDefault();
 
@@ -73,7 +73,7 @@ function ProductCampaignList() {
         } catch (error) {
             console.error('Error editing campaign:', error);
         }
-    };
+    }, [selectedCampaignId]);
 
     const getSelectedCampaign = () => campaigns.find((campaign) => campaign.id === selectedCampaignId);
 

@@ -1,35 +1,13 @@
-import { useEffect, useState } from 'react'
-import { collection, onSnapshot } from 'firebase/firestore'
 import db from '../../Firebase-init'
 import CampaignBoardHeader from '../Board/CampaignBoardHeader'
 import { doc, deleteDoc } from "firebase/firestore";
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
+import useFirestoreCollection from '../../hooks/useFirestoreCollection'
 
 function ProductCampaignList() {
-    const [campaigns, setCampaigns] = useState([])
+    const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
-    useEffect(() => {
-        try {
-            const campaignsRef = collection(db, 'campaigns')
-
-            const unsubscribe = onSnapshot(
-                campaignsRef,
-                (querySnapshot) => {
-                    const campaignList = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }))
-                    setCampaigns(campaignList)
-                }
-            )
-
-            return () => unsubscribe()
-        } catch (error) {
-            console.error('Error fetching campaigns:', error)
-        }
-    }, [])
-
-    const handleDeleteCampaign = async() => {
+    const handleDeleteCampaign = async (event) => {
         try {
 
             event.preventDefault();
@@ -54,7 +32,7 @@ function ProductCampaignList() {
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
             <CampaignBoardHeader />
 
-            <CampaignBoardMeta />
+            <CampaignBoardMeta campaignCount={campaigns.length} isLoading={isLoading} />
 
             <p className="campaign-meta__divider">Choose campaign to delete:</p>
 

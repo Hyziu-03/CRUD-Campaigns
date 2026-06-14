@@ -1,44 +1,21 @@
-import { useEffect, useState } from 'react'
-import { collection, onSnapshot } from 'firebase/firestore'
-import db from '../Firebase-init'
 import CampaignBoardHeader from './Board/CampaignBoardHeader'
-import CampaignBoardMeta from './Board/CampaignBoardMeta';
-import CampaignBoardList from './Board/CampaignBoardList';
+import CampaignBoardMeta from './Board/CampaignBoardMeta'
+import CampaignBoardList from './Board/CampaignBoardList'
 import CampaignBoardOptions from './Board/CampaignBoardOptions';
+import useFirestoreCollection from '../hooks/useFirestoreCollection'
 
 function CampaignHome() {
-    const [campaigns, setCampaigns] = useState([])
-
-    useEffect(() => {
-        try {
-            const campaignsRef = collection(db, 'campaigns')
-
-            const unsubscribe = onSnapshot(
-                campaignsRef,
-                (querySnapshot) => {
-                    const campaignList = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }))
-                    setCampaigns(campaignList)
-                }
-            )
-
-            return () => unsubscribe()
-        } catch (error) {
-            console.error('Error fetching campaigns:', error)
-        }
-    }, [])
+    const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
     return (
         <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
             <CampaignBoardHeader />
 
-            <CampaignBoardMeta />
+            <CampaignBoardMeta campaignCount={campaigns.length} isLoading={isLoading} />
 
             <p className="campaign-meta__divider">Here are your campaigns:</p>
 
-            <CampaignBoardList campaigns={campaigns} />
+            <CampaignBoardList campaigns={campaigns} isLoading={isLoading} />
 
             <CampaignBoardOptions />
 
