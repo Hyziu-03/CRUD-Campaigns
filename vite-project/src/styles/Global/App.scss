@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@use "../variables.scss" as *;
 
 * {
   margin: 0;
@@ -26,33 +26,48 @@ button {
 .campaign-board__form {
   display: flex;
   flex-direction: column;
-}
+  border: 1px solid $black;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 50vw;
+  align-items: center;
+  align-self: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
 
-/* Campaign Form */
+  @media (max-width: 768px) {
+    border: none;
+    box-shadow: none;
+  }
 
-.campaign-board__form {
-  margin: 1rem 0rem 2rem 0rem;
+  @media (max-width: 425px) {
+    margin: 2rem 4rem;
+  }
 }
 
 .campaign-form__input {
   font-size: 1rem;
   padding: 0.5rem;
-  margin: 0.5rem 0 0.5rem 2rem;
   display: flex;
-  align-self: flex-start;
-  width: 20vw;
+  min-width: 15vw;
 }
 
 .campaign-form-label,
 .campaign-form-label__edit {
   margin-left: 2rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+  }
 }
 
 .campaign-list-selection {
   display: flex;
-  max-width: 20vw;
   margin-top: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .campaign-form-label__edit {
@@ -67,27 +82,16 @@ button {
   justify-content: center;
   gap: 1rem;
   margin: 5rem 0 0 2rem;
-}
 
-@media (max-width: 768px) {
-  .campaign-form__input {
-    width: 80vw;
-  }
-
-  .campaign-form-label,
-  .campaign-form-label__edit {
-    display: flex;
-    flex-direction: column;
-    margin: 0 2rem;
-  }
-
-  .campaign-meta__divider {
-    margin: 2rem 0 2rem 2rem;
-  }
-
-  .campaign-empty {
+  @media (max-width: 768px) {
     margin: 5rem 2rem 0;
     text-align: center;
+  }
+}
+
+.campaign-meta__divider {
+  @media (max-width: 768px) {
+    margin: 2rem 0 2rem 2rem;
   }
 }
 
@@ -100,4 +104,9 @@ button {
 .campaign-board__main {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.campaign-list__edit {
+  margin: 0 auto;
 }

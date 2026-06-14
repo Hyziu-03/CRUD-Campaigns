@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables.scss" as *;
 
 /* Campaign Board Header */
 
@@ -41,6 +41,7 @@
   display: flex;
   gap: 1rem;
   margin: 2rem 0 2rem 2rem;
+  flex-wrap: wrap;
 }
 
 .campaign-board__option {
@@ -76,21 +77,24 @@
 
   @media (max-width: 768px) {
     max-width: 66vw;
-    min-width: 50vw;
   }
 }
 
 .campaign-list {
   display: flex;
-  overflow-x: scroll;
+  flex-wrap: wrap;
+  margin: 0 2rem;
 }
 
 .campaign-list-selection {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 2rem;
-  margin-top: 2rem;
   padding: 1rem;
-  margin: 2rem 0 0 2rem;
+  font-weight: bold;
+}
+
+.campaign-list__label {
+  display: flex;
+  flex-direction: column;
 }
