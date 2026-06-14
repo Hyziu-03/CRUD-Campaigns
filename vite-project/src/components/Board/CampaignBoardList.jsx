@@ -1,37 +1,16 @@
-import { useEffect, useState } from 'react'
-import { collection, onSnapshot } from 'firebase/firestore'
-import db from '../../Firebase-init'
 import '../../styles/Board/Board.scss';
 
 
-export default function CampaignBoardList() {
-
-    const [campaigns, setCampaigns] = useState([])
-
-    useEffect(() => {
-        try {
-            const campaignsRef = collection(db, 'campaigns')
-
-            const unsubscribe = onSnapshot(
-                campaignsRef,
-                (querySnapshot) => {
-                    const campaignList = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }))
-                    setCampaigns(campaignList)
-                }
-            )
-
-            return () => unsubscribe()
-        } catch (error) {
-            console.error('Error fetching campaigns:', error)
-        }
-    }, [])
+export default function CampaignBoardList({ campaigns = [], isLoading = false }) {
 
     return (
         <section>
-            {campaigns.length > 0 ? (
+            {isLoading ? (
+                <div className="campaign-empty">
+                    <h2>Loading campaigns</h2>
+                    <p>Fetching the latest campaign list from Firestore.</p>
+                </div>
+            ) : campaigns.length > 0 ? (
                 <ul className="campaign-list">
                     {campaigns.map((campaign) => (
                         <li key={campaign.id} className="campaign-card">
