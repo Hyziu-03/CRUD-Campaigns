@@ -1,6 +1,20 @@
 $baseFontSize: 16px;
-$black: #333;
-$white: #f0f0f0;
-$gray: #808080;
-$fontFamily: Arial, sans-serif;
+$fontFamily: "Trebuchet MS", sans-serif;
+$headingFamily: Georgia, serif;
 
+$black: #1f2937;
+$white: #f8fafc;
+$gray: #6b7280;
+$surface: #ffffffd1;
+$surfaceStrong: #ffffff;
+$border: #1f29371f;
+$accent: #2563eb;
+$accentStrong: #0f172a;
+$accentSoft: #dbeafe;
+$success: #0f766e;
+$danger: #b91c1c;
+
+$shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+$shadowSoft: 0 10px 30px rgba(15, 23, 42, 0.08);
+$radiusLarge: 2rem;
+$radiusMedium: 1.25rem;
