@@ -57,7 +57,7 @@ function ProductCampaignList() {
         try {
             event.preventDefault();
 
-            const inputFields = document.querySelectorAll(".campaign-board__edit-input");
+            const inputFields = document.querySelectorAll(".board-edit-input");
 
             for (let i = 0; i < inputFields.length; i++) {
                 const currentFieldName = inputFields[i].name;
@@ -93,30 +93,30 @@ function ProductCampaignList() {
     );
 
     return (
-        <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
+        <section className="board" id="board" aria-labelledby="board-title">
             <CampaignBoardHeader />
             <CampaignBoardMeta />
 
-            <p className="campaign-meta__divider">Choose campaign to edit:</p>
+            <p className="meta-divider">Choose campaign to edit:</p>
 
             <section>
                 {campaigns.length > 0 ? (
-                    <ul className="campaign-list">
+                    <ul className="list">
                         {campaigns.map((campaign) => (
-                            <li key={campaign.id} className="campaign-list-selection">
+                            <li key={campaign.id} className="list-selection">
                                 <input
                                     type="radio"
                                     name="campaign"
-                                    className="campaign-form__input"
+                                    className="form-input"
                                     id={campaign.id}
                                     onChange={() => handleEditForm(campaign.id)}
                                 />
-                                <label htmlFor={campaign.id} className="campaign-list-selection">{campaign.name}</label>
+                                <label htmlFor={campaign.id} className="list-selection">{campaign.name}</label>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <div className="campaign-empty">
+                    <div className="empty">
                         <h2>No campaigns yet</h2>
                         <p>Firestore returned an empty campaigns collection.</p>
                     </div>
@@ -125,24 +125,24 @@ function ProductCampaignList() {
 
             {showEditForm && selectedCampaignId && (
                 <div>
-                    {<ul className="campaign-list campaign-list__edit">
+                    {<ul className="list list-edit">
 
-                        <form className="campaign-board__form">
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">
+                        <form className="board-form">
+                            <label className="list-label">
+                                <p className="list-selection">
                                     Current name: {selectedCampaign.name}
                                 </p>
-                                <p className="campaign-list-selection__edit">
+                                <p className="list-selection-edit">
                                     New name (leave blank to keep current value):
                                 </p>
-                                <input type="text" name="name" placeholder="Spring launch push" required className="campaign-form__input" />
+                                <input type="text" name="name" placeholder="Spring launch push" required className="form-input" />
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">
+                            <label className="list-label">
+                                <p className="list-selection">
                                     Current keywords: {selectedCampaign.keywords.split(" ").join(", ")}
                                 </p>
-                                <p className="campaign-list-selection__edit">
+                                <p className="list-selection-edit">
                                     New keywords (leave blank to keep current value):
                                 </p>
                                 <input
@@ -151,39 +151,39 @@ function ProductCampaignList() {
                                     placeholder="summer launch bundle"
                                     defaultValue={selectedCampaign?.keywords ?? ''}
                                     required
-                                    className="campaign-form__input"
+                                    className="form-input"
                                     list="keyword-suggestions"
                                 />
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">
+                            <label className="list-label">
+                                <p className="list-selection">
                                     Current bid amount: {selectedCampaign.bidAmount}
                                 </p>
-                                <p className="campaign-list-selection__edit">
+                                <p className="list-selection-edit">
 
                                     New bid amount (leave blank to keep current value):
 
                                 </p>
-                                <input type="number" name="bidAmount" placeholder="1000" required className="campaign-form__input" />
+                                <input type="number" name="bidAmount" placeholder="1000" required className="form-input" />
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">
+                            <label className="list-label">
+                                <p className="list-selection">
                                     Current fund: {selectedCampaign.fund}
                                 </p>
-                                <p className="campaign-list-selection__edit">
+                                <p className="list-selection-edit">
 
                                     New fund (leave blank to keep current value):
                                 </p>
-                                <input type="number" name="fund" placeholder="5000" required className="campaign-form__input" />
+                                <input type="number" name="fund" placeholder="5000" required className="form-input" />
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">
+                            <label className="list-label">
+                                <p className="list-selection">
                                     Current town: {selectedCampaign.town}
                                 </p>
-                                <p className="campaign-list-selection__edit">
+                                <p className="list-selection-edit">
 
                                     New town (leave blank to keep current value):
                                 </p>
@@ -191,7 +191,7 @@ function ProductCampaignList() {
                                     name="town"
                                     defaultValue={selectedCampaign.town}
                                     required
-                                    className="campaign-form__input"
+                                    className="form-input"
                                 >
                                     {towns.map((town) => (
                                         <option key={town.name} value={town.name}>
@@ -201,21 +201,21 @@ function ProductCampaignList() {
                                 </select>
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">Current radius: {selectedCampaign.radius}</p>
-                                <p className="campaign-list-selection__edit">
+                            <label className="list-label">
+                                <p className="list-selection">Current radius: {selectedCampaign.radius}</p>
+                                <p className="list-selection-edit">
                                     New radius (leave blank to keep current value):
                                 </p>
-                                <input type="number" name="radius" placeholder="10" required className="campaign-form__input" />
+                                <input type="number" name="radius" placeholder="10" required className="form-input" />
                             </label>
 
-                            <label className="campaign-list__label">
-                                <p className="campaign-list-selection">Current status: {selectedCampaign.status}</p>
-                                <p className="campaign-list-selection__edit">
+                            <label className="list-label">
+                                <p className="list-selection">Current status: {selectedCampaign.status}</p>
+                                <p className="list-selection-edit">
 
                                     New status:
                                 </p>
-                                <select name="status" defaultValue="scheduled" required className="campaign-form__input">
+                                <select name="status" defaultValue="scheduled" required className="form-input">
                                     <option value="on">On</option>
                                     <option value="off">Off</option>
                                 </select>
@@ -232,14 +232,14 @@ function ProductCampaignList() {
                 </div>
             )}
 
-            <div className="campaign-board__options ">
+            <div className="board-options ">
                 <button type="button" onClick={handleEditCampaign}>
-                    <a className="campaign-board__option" href="/">
+                    <a className="board-option" href="/">
                         Edit campaign
                     </a>
                 </button>
                 <button>
-                    <a className="campaign-board__option" href="/view-campaigns">
+                    <a className="board-option" href="/view-campaigns">
                         Cancel
                     </a>
                 </button>

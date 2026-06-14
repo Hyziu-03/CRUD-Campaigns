@@ -8,12 +8,12 @@ function CreateCampaign() {
     const { items: towns } = useFirestoreCollection('towns')
 
     return (
-        <section className="campaign-board" id="create-campaign" aria-labelledby="create-campaign-title">
+        <section className="board" id="create-campaign">
             <CampaignBoardHeader />
-            <main className="campaign-board__main">
+            <main className="board-main">
                 <CampaignBoardMeta campaignCount={campaigns.length} isLoading={campaignsLoading} />
 
-                <p className="campaign-meta__divider">Enter data to add a campaign:</p>
+                <p className="meta-divider">Enter data to add a campaign:</p>
 
                 <CampaignForm towns={towns} campaigns={campaigns} />
             </main>

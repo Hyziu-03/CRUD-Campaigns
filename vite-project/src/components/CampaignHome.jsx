@@ -8,12 +8,12 @@ function CampaignHome() {
     const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
     return (
-        <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
+        <section className="board" id="board" aria-labelledby="board-title">
             <CampaignBoardHeader />
 
             <CampaignBoardMeta campaignCount={campaigns.length} isLoading={isLoading} />
 
-            <p className="campaign-meta__divider">Here are your campaigns:</p>
+            <p className="meta-divider">Here are your campaigns:</p>
 
             <CampaignBoardList campaigns={campaigns} isLoading={isLoading} />
 

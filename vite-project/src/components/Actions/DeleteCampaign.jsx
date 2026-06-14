@@ -29,22 +29,21 @@ function ProductCampaignList() {
     }
 
     return (
-        <section className="campaign-board" id="campaign-board" aria-labelledby="campaign-board-title">
+        <section className="board" id="board" aria-labelledby="board-title">
             <CampaignBoardHeader />
 
             <CampaignBoardMeta campaignCount={campaigns.length} isLoading={isLoading} />
 
-            <p className="campaign-meta__divider">Choose campaign to delete:</p>
+            <p className="meta-divider">Choose campaign to delete:</p>
 
             <section>
                 {campaigns.length > 0 ? (
-                    <ul className="campaign-list">
+                    <ul className="list">
                         {campaigns.map((campaign) => (
-                            <li key={campaign.id} className="campaign-list-selection">
+                            <li key={campaign.id} className="list-selection">
                                 <input
                                     type="radio"
                                     name="campaign"
-                                    className="campaign-card__name"
                                     id={campaign.id}
                                 />
                                 <label htmlFor={campaign.id}>{campaign.name}</label>
@@ -52,18 +51,18 @@ function ProductCampaignList() {
                         ))}
                     </ul>
                 ) : (
-                    <div className="campaign-empty">
+                    <div className="empty">
                         <h2>No campaigns yet</h2>
                         <p >Firestore returned an empty campaigns collection.</p>
                     </div>
                 )}
             </section>
 
-            <div className="campaign-board__options ">
-                <button><a className="campaign-board__option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
+            <div className="board-options ">
+                <button><a className="board-option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
 
                 <button>
-                    <a className="campaign-board__option" href="/view-campaigns">
+                    <a className="board-option" href="/view-campaigns">
                         Cancel
                     </a>
                 </button>

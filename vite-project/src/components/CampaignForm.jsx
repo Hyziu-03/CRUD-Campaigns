@@ -116,8 +116,8 @@ function CampaignForm({ towns = [], campaigns = [] }) {
     }
 
     return (
-        <form className="campaign-board__form" onSubmit={handleSubmit} noValidate>
-            <label className="campaign-list-selection">
+        <form className="board-form" onSubmit={handleSubmit} noValidate>
+            <label className="list-selection">
                 Campaign name:
                 <input
                     type="text"
@@ -125,12 +125,12 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     placeholder="Spring launch push"
                     value={formData.name}
                     onChange={handleChange}
-                    className="campaign-form__input"
+                    className="form-input"
                 />
                 {errors.name && <span className="error-message">{errors.name}</span>}
             </label>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Keywords:
                 <input
@@ -139,7 +139,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     placeholder="summer launch bundle"
                     value={formData.keywords}
                     onChange={handleChange}
-                    className="campaign-form__input"
+                    className="form-input"
                     list="keyword-suggestions"
 
                 />
@@ -151,7 +151,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                 ))}
             </datalist>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Bid amount:
                 <input
@@ -162,13 +162,13 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     onChange={handleChange}
                     min="0.01"
                     step="0.01"
-                    className="campaign-form__input"
+                    className="form-input"
 
                 />
                 {errors.bidAmount && <span className="error-message">{errors.bidAmount}</span>}
             </label>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Fund:
                 <input
@@ -179,13 +179,13 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     onChange={handleChange}
                     min="0.01"
                     step="0.01"
-                    className="campaign-form__input"
+                    className="form-input"
 
                 />
                 {errors.fund && <span className="error-message">{errors.fund}</span>}
             </label>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Town:
                 <select
@@ -193,7 +193,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     value={formData.town}
                     onChange={handleChange}
                     required
-                    className="campaign-form__input"
+                    className="form-input"
 
                 >
                     <option value="">Select a town</option>
@@ -206,7 +206,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                 {errors.town && <span className="error-message">{errors.town}</span>}
             </label>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Radius (km):
                 <input
@@ -217,19 +217,19 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                     onChange={handleChange}
                     min="1"
                     step="1"
-                    className="campaign-form__input"
+                    className="form-input"
                 />
                 {errors.radius && <span className="error-message">{errors.radius}</span>}
             </label>
 
-            <label className="campaign-list-selection">
+            <label className="list-selection">
 
                 Status:
                 <select
                     name="status"
                     value={formData.status}
                     onChange={handleChange}
-                    className="campaign-form__input"
+                    className="form-input"
                 >
                     <option value="on">On</option>
                     <option value="off">Off</option>
@@ -237,14 +237,14 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                 {errors.status && <span className="error-message">{errors.status}</span>}
             </label>
 
-            <div className="campaign-board__options ">
-                <button type="submit" id="campaign-form__submit">
-                    <a href="" className="campaign-board__option" onClick={handleSubmit}>
+            <div className="board-options ">
+                <button type="submit">
+                    <a href="" className="board-option" onClick={handleSubmit}>
                         Save campaign
                     </a>
                 </button>
                 <button>
-                    <a className="campaign-board__option" href="/view-campaigns">
+                    <a className="board-option" href="/view-campaigns">
                         Cancel
                     </a>
                 </button>

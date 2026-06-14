@@ -2,15 +2,15 @@ import '../../styles/Board/Board.scss';
 
 function CampaignBoardOptions() {
     return (
-        <section className="campaign-board__options">
+        <section className="board-options">
             <button type="button">
-                <a className="campaign-board__option" href="/create-campaign">Create campaign</a>
+                <a className="board-option" href="/create-campaign">Create campaign</a>
             </button>
             <button type="button">
-                <a className="campaign-board__option" href="/edit-campaign">Edit campaign</a>
+                <a className="board-option" href="/edit-campaign">Edit campaign</a>
             </button>
             <button type="button">
-                <a className="campaign-board__option" href="/delete-campaign">Delete campaign</a>
+                <a className="board-option" href="/delete-campaign">Delete campaign</a>
             </button>
         </section>
     )
