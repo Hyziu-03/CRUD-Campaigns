@@ -7,24 +7,28 @@ export default function CampaignBoardMeta() {
     const [campaigns, setCampaigns] = useState([])
 
     useEffect(() => {
-        function subscriveToCampaigns() {
-            const campaignsRef = collection(db, 'campaigns')
+        try {
+            const subscribetoCampaigns = () => {
+                const campaignsRef = collection(db, 'campaigns')
 
-            const unsubscribe = onSnapshot(
-                campaignsRef,
-                (querySnapshot) => {
-                    const campaignList = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }))
-                    setCampaigns(campaignList)
-                }
-            )
+                const unsubscribe = onSnapshot(
+                    campaignsRef,
+                    (querySnapshot) => {
+                        const campaignList = querySnapshot.docs.map((doc) => ({
+                            id: doc.id,
+                            ...doc.data(),
+                        }))
+                        setCampaigns(campaignList)
+                    }
+                )
 
-            return () => unsubscribe()
+                return () => unsubscribe()
+            }
+
+            subscribetoCampaigns()
+        } catch (error) {
+            console.error('Error fetching campaigns:', error)
         }
-
-        subscriveToCampaigns()
     }, [])
 
     return (

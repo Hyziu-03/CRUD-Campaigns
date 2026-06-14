@@ -27,27 +27,36 @@ function CampaignForm() {
     });
 
     useEffect(() => {
-        const townsRef = collection(db, 'towns');
-        const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
-            const townList = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setTowns(townList);
-        });
-        return () => unsubscribe();
+        try {
+            const townsRef = collection(db, 'towns');
+            const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
+                const townList = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setTowns(townList);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.error('Error fetching towns:', error);
+        }
+
     }, []);
 
     useEffect(() => {
-        const campaignsRef = collection(db, 'campaigns');
-        const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
-            const campaignList = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setCampaigns(campaignList);
-        });
-        return () => unsubscribe();
+        try {
+            const campaignsRef = collection(db, 'campaigns');
+            const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
+                const campaignList = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setCampaigns(campaignList);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.error('Error fetching campaigns:', error);
+        }
     }, []);
 
     const keywordSuggestions = Array.from(
@@ -62,59 +71,68 @@ function CampaignForm() {
     );
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        try {
+            const { name, value } = e.target;
+            setFormData(prev => ({ ...prev, [name]: value }));
 
-        if (errors[name])
-            setErrors(prev => ({ ...prev, [name]: '' }));
+            if (errors[name])
+                setErrors(prev => ({ ...prev, [name]: '' }));
 
+        } catch (error) {
+            console.error('Error handling input change:', error);
+        }
     };
 
     const validateForm = () => {
-        let valid = true;
-        const newErrors = { ...errors };
+        try {
+            let valid = true;
+            const newErrors = { ...errors };
 
-        if (!formData.name.trim()) {
-            newErrors.name = 'Campaign name is required';
-            valid = false;
+            if (!formData.name.trim()) {
+                newErrors.name = 'Campaign name is required';
+                valid = false;
+            }
+
+            if (!formData.keywords.trim()) {
+                newErrors.keywords = 'Keywords are required';
+                valid = false;
+            }
+
+            if (!formData.bidAmount) {
+                newErrors.bidAmount = 'Bid amount is required';
+                valid = false;
+            } else if (isNaN(formData.bidAmount) || parseFloat(formData.bidAmount) <= 0) {
+                newErrors.bidAmount = 'Bid amount must be a positive number';
+                valid = false;
+            }
+
+            if (!formData.fund) {
+                newErrors.fund = 'Fund is required';
+                valid = false;
+            } else if (isNaN(formData.fund) || parseFloat(formData.fund) <= 0) {
+                newErrors.fund = 'Fund must be a positive number';
+                valid = false;
+            }
+
+            if (!formData.town) {
+                newErrors.town = 'Town is required';
+                valid = false;
+            }
+
+            if (!formData.radius) {
+                newErrors.radius = 'Radius is required';
+                valid = false;
+            } else if (isNaN(formData.radius) || parseFloat(formData.radius) <= 0) {
+                newErrors.radius = 'Radius must be a positive number';
+                valid = false;
+            }
+
+            setErrors(newErrors);
+            return valid;
+        } catch (error) {
+            console.error('Validation error:', error);
+            return false;
         }
-
-        if (!formData.keywords.trim()) {
-            newErrors.keywords = 'Keywords are required';
-            valid = false;
-        }
-
-        if (!formData.bidAmount) {
-            newErrors.bidAmount = 'Bid amount is required';
-            valid = false;
-        } else if (isNaN(formData.bidAmount) || parseFloat(formData.bidAmount) <= 0) {
-            newErrors.bidAmount = 'Bid amount must be a positive number';
-            valid = false;
-        }
-
-        if (!formData.fund) {
-            newErrors.fund = 'Fund is required';
-            valid = false;
-        } else if (isNaN(formData.fund) || parseFloat(formData.fund) <= 0) {
-            newErrors.fund = 'Fund must be a positive number';
-            valid = false;
-        }
-
-        if (!formData.town) {
-            newErrors.town = 'Town is required';
-            valid = false;
-        }
-
-        if (!formData.radius) {
-            newErrors.radius = 'Radius is required';
-            valid = false;
-        } else if (isNaN(formData.radius) || parseFloat(formData.radius) <= 0) {
-            newErrors.radius = 'Radius must be a positive number';
-            valid = false;
-        }
-
-        setErrors(newErrors);
-        return valid;
     };
 
 
@@ -122,11 +140,11 @@ function CampaignForm() {
         event.preventDefault();
 
         try {
-            if (validateForm()) {
-                const docRef = await addDoc(collection(db, "campaigns"), formData);
-                alert("Document written with ID: ", docRef.id);
-                window.location.reload();
-            }
+            if (!validateForm()) return;
+                
+            const docRef = await addDoc(collection(db, "campaigns"), formData);
+            alert("Document written with ID: ", docRef.id);
+            window.location.reload();
         } catch (e) {
             console.error("Error adding document: ", e);
         }

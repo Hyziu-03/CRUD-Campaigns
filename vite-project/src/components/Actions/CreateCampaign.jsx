@@ -10,20 +10,24 @@ function CreateCampaign() {
     const [campaigns, setCampaigns] = useState([])
 
     useEffect(() => {
-        const campaignsRef = collection(db, 'campaigns')
+        try {
+            const campaignsRef = collection(db, 'campaigns')
 
-        const unsubscribe = onSnapshot(
-            campaignsRef,
-            (querySnapshot) => {
-                const campaignList = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }))
-                setCampaigns(campaignList)
-            }
-        )
+            const unsubscribe = onSnapshot(
+                campaignsRef,
+                (querySnapshot) => {
+                    const campaignList = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }))
+                    setCampaigns(campaignList)
+                }
+            )
 
-        return () => unsubscribe()
+            return () => unsubscribe()
+        } catch (error) {
+            console.error('Error fetching campaigns:', error)
+        }
     }, [])
 
     return (

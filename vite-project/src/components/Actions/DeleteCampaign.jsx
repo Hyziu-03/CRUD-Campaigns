@@ -9,34 +9,39 @@ function ProductCampaignList() {
     const [campaigns, setCampaigns] = useState([])
 
     useEffect(() => {
-        const campaignsRef = collection(db, 'campaigns')
+        try {
+            const campaignsRef = collection(db, 'campaigns')
 
-        const unsubscribe = onSnapshot(
-            campaignsRef,
-            (querySnapshot) => {
-                const campaignList = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }))
-                setCampaigns(campaignList)
-            }
-        )
+            const unsubscribe = onSnapshot(
+                campaignsRef,
+                (querySnapshot) => {
+                    const campaignList = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }))
+                    setCampaigns(campaignList)
+                }
+            )
 
-        return () => unsubscribe()
+            return () => unsubscribe()
+        } catch (error) {
+            console.error('Error fetching campaigns:', error)
+        }
     }, [])
 
-    async function handleDeleteCampaign() {
-        event.preventDefault();
-
-        const selectedRadio = document.querySelector('input[name="campaign"]:checked');
-        if (!selectedRadio) {
-            alert("Please select a campaign to delete.");
-            return;
-        }
-
-        const targetCampaignId = selectedRadio.id;
-
+    const handleDeleteCampaign = async() => {
         try {
+
+            event.preventDefault();
+
+            const selectedRadio = document.querySelector('input[name="campaign"]:checked');
+            if (!selectedRadio) {
+                alert("Please select a campaign to delete.");
+                return;
+            }
+
+            const targetCampaignId = selectedRadio.id;
+
             await deleteDoc(doc(db, "campaigns", targetCampaignId));
             alert("Document deleted successfully!");
         } catch (error) {
@@ -50,8 +55,6 @@ function ProductCampaignList() {
             <CampaignBoardHeader />
 
             <CampaignBoardMeta />
-
-            
 
             <p className="campaign-meta__divider">Choose campaign to delete:</p>
 

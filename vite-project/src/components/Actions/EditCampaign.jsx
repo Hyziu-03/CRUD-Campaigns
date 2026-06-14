@@ -11,57 +11,71 @@ function ProductCampaignList() {
     const [showEditForm, setShowEditForm] = useState(false);
 
     useEffect(() => {
-        const campaignsRef = collection(db, 'campaigns');
-        const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
-            const campaignList = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setCampaigns(campaignList);
-        });
-        return () => unsubscribe();
+        try {
+            const campaignsRef = collection(db, 'campaigns');
+            const unsubscribe = onSnapshot(campaignsRef, (querySnapshot) => {
+                const campaignList = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setCampaigns(campaignList);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.error('Error fetching campaigns:', error);
+        }
     }, []);
 
     useEffect(() => {
-        const townsRef = collection(db, 'towns');
-        const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
-            const townList = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setTowns(townList);
-        });
-        return () => unsubscribe();
+        try {
+            const townsRef = collection(db, 'towns');
+            const unsubscribe = onSnapshot(townsRef, (querySnapshot) => {
+                const townList = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setTowns(townList);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.error('Error fetching towns:', error);
+        }
     }, []);
 
     const handleEditForm = () => {
-        const selectedRadio = document.querySelector('input[name="campaign"]:checked');
+        try {
+            const selectedRadio = document.querySelector('input[name="campaign"]:checked');
 
-        setSelectedCampaignId(selectedRadio.id);
-        setShowEditForm(true);
+            setSelectedCampaignId(selectedRadio.id);
+            setShowEditForm(true);
+        } catch (error) {
+            console.error('Error handling edit form:', error);
+        }
     }
 
     const handleEditCampaign = () => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        const inputFields = document.querySelectorAll(".campaign-board__edit-input");
+            const inputFields = document.querySelectorAll(".campaign-board__edit-input");
 
-        for (let i = 0; i < inputFields.length; i++) {
-            const currentFieldName = inputFields[i].name;
-            const currentFieldValue = inputFields[i].value;
+            for (let i = 0; i < inputFields.length; i++) {
+                const currentFieldName = inputFields[i].name;
+                const currentFieldValue = inputFields[i].value;
 
-            if (currentFieldValue !== null || currentFieldValue !== undefined) {
-                const currentCampaign = doc(db, "campaigns", selectedCampaignId);
-                updateDoc(currentCampaign, {
-                    [currentFieldName]: currentFieldValue
-                })
+                if (currentFieldValue !== null || currentFieldValue !== undefined) {
+                    const currentCampaign = doc(db, "campaigns", selectedCampaignId);
+                    updateDoc(currentCampaign, {
+                        [currentFieldName]: currentFieldValue
+                    })
+                }
             }
+        } catch (error) {
+            console.error('Error editing campaign:', error);
         }
     };
 
-    function getSelectedCampaign() {
-        return campaigns.find((campaign) => campaign.id === selectedCampaignId);
-    }
+    const getSelectedCampaign = () => campaigns.find((campaign) => campaign.id === selectedCampaignId);
 
     const selectedCampaign = getSelectedCampaign();
     const keywordSuggestions = Array.from(
@@ -97,7 +111,7 @@ function ProductCampaignList() {
                                     id={campaign.id}
                                     onChange={() => handleEditForm(campaign.id)}
                                 />
-                                <label htmlFor={campaign.id} classname="campaign-list-selection">{campaign.name}</label>
+                                <label htmlFor={campaign.id} className="campaign-list-selection">{campaign.name}</label>
                             </li>
                         ))}
                     </ul>
@@ -114,7 +128,7 @@ function ProductCampaignList() {
                     {<ul className="campaign-list campaign-list__edit">
 
                         <form className="campaign-board__form">
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">
                                     Current name: {selectedCampaign.name}
                                 </p>
@@ -124,7 +138,7 @@ function ProductCampaignList() {
                                 <input type="text" name="name" placeholder="Spring launch push" required className="campaign-form__input" />
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">
                                     Current keywords: {selectedCampaign.keywords.split(" ").join(", ")}
                                 </p>
@@ -142,7 +156,7 @@ function ProductCampaignList() {
                                 />
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">
                                     Current bid amount: {selectedCampaign.bidAmount}
                                 </p>
@@ -154,7 +168,7 @@ function ProductCampaignList() {
                                 <input type="number" name="bidAmount" placeholder="1000" required className="campaign-form__input" />
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">
                                     Current fund: {selectedCampaign.fund}
                                 </p>
@@ -165,7 +179,7 @@ function ProductCampaignList() {
                                 <input type="number" name="fund" placeholder="5000" required className="campaign-form__input" />
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">
                                     Current town: {selectedCampaign.town}
                                 </p>
@@ -187,7 +201,7 @@ function ProductCampaignList() {
                                 </select>
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">Current radius: {selectedCampaign.radius}</p>
                                 <p className="campaign-list-selection__edit">
                                     New radius (leave blank to keep current value):
@@ -195,7 +209,7 @@ function ProductCampaignList() {
                                 <input type="number" name="radius" placeholder="10" required className="campaign-form__input" />
                             </label>
 
-                            <label>
+                            <label className="campaign-list__label">
                                 <p className="campaign-list-selection">Current status: {selectedCampaign.status}</p>
                                 <p className="campaign-list-selection__edit">
 
