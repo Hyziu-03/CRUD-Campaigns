@@ -25,9 +25,8 @@ export default function useFirestoreCollection(collectionName) {
             },
             (error) => {
                 console.error(`Error fetching ${collectionName}:`, error)
-                if (isActive) {
+                if (isActive) 
                     setIsLoading(false)
-                }
             }
         )
 
