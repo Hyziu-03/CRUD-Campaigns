@@ -59,16 +59,16 @@ function CampaignHome() {
                         ))}
                     </ul>
                 ) : (
-                    <div className="empty" role="status" aria-live="polite">
+                    <section className="empty" role="status" aria-live="polite">
                         <h2 id="no-campaigns-heading">No campaigns yet</h2>
                         <p aria-describedby="no-campaigns-heading">
                             Firestore returned an empty campaigns collection.
                         </p>
-                    </div>
+                    </section>
                 )}
             </section>
 
-            <div className="board-options" role="toolbar" aria-label="Campaign actions">
+            <section className="board-options" role="toolbar" aria-label="Campaign actions">
                 <button
                     type="button"
                     className="board-option"
@@ -86,7 +86,7 @@ function CampaignHome() {
                 >
                     Cancel
                 </Link>
-            </div>
+            </section>
         </section>
     )
 }

@@ -4,7 +4,7 @@ export default function CampaignBoardList({ campaigns = [], isLoading = false })
     return (
         <section aria-labelledby="campaigns-heading">
             {isLoading ? (
-                <div
+                <section
                     className="empty"
                     role="status"
                     aria-live="polite"
@@ -14,7 +14,7 @@ export default function CampaignBoardList({ campaigns = [], isLoading = false })
                     <p aria-describedby="loading-heading">
                         Fetching the latest campaign list from Firestore.
                     </p>
-                </div>
+                </section>
             ) : campaigns.length > 0 ? (
                 <ul className="list" role="list" aria-label="Marketing campaigns">
                     {campaigns.map((campaign) => (
@@ -31,7 +31,7 @@ export default function CampaignBoardList({ campaigns = [], isLoading = false })
                     ))}
                 </ul>
             ) : (
-                <div
+                <section
                     className="empty"
                     role="status"
                     aria-live="polite"
@@ -40,7 +40,7 @@ export default function CampaignBoardList({ campaigns = [], isLoading = false })
                     <p aria-describedby="no-campaigns-heading">
                         Firestore returned an empty campaigns collection.
                     </p>
-                </div>
+                </section>
             )}
         </section>
     )

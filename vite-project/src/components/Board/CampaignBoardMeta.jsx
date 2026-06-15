@@ -2,7 +2,7 @@ import '../../styles/Board/Board.scss';
 
 export default function CampaignBoardMeta({ campaignCount = 0, isLoading = false }) {
     return (
-        <div
+        <section
             className="board-meta"
             role="status"
             aria-live="polite"
@@ -19,6 +19,6 @@ export default function CampaignBoardMeta({ campaignCount = 0, isLoading = false
                     {campaignCount}
                 </span>
             )}
-        </div>
+        </section>
     )
 }

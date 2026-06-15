@@ -15,9 +15,9 @@ export function RouteFallback() {
             aria-live="polite"
             aria-label="Loading page content"
         >
-            <div role="status" aria-live="polite">
+            <section role="status" aria-live="polite">
                 Loading page...
-            </div>
+            </section>
         </main>
     )
 }
