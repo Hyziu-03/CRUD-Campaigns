@@ -3,11 +3,38 @@ import { Link } from 'react-router';
 
 function CampaignBoardOptions() {
     return (
-        <section className="board-options">
-            <Link className="board-option" to="/create-campaign">Create campaign</Link>
-            <Link className="board-option" to="/edit-campaign">Edit campaign</Link>
-            <Link className="board-option" to="/delete-campaign">Delete campaign</Link>
-        </section>
+        <nav
+            className="board-options"
+            role="navigation"
+            aria-label="Main campaign actions"
+        >
+            <Link
+                className="board-option"
+                to="/create-campaign"
+                role="link"
+                aria-label="Create a new marketing campaign"
+            >
+                Create campaign
+            </Link>
+
+            <Link
+                className="board-option"
+                to="/edit-campaign"
+                role="link"
+                aria-label="Edit an existing marketing campaign"
+            >
+                Edit campaign
+            </Link>
+
+            <Link
+                className="board-option"
+                to="/delete-campaign"
+                role="link"
+                aria-label="Delete a marketing campaign"
+            >
+                Delete campaign
+            </Link>
+        </nav>
     )
 }
 

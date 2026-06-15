@@ -8,8 +8,16 @@ const EditCampaign = lazy(() => import('./components/Actions/EditCampaign.jsx'))
 
 export function RouteFallback() {
     return (
-        <main className="app-shell" aria-busy="true">
-            Loading page...
+        <main
+            className="app-shell"
+            role="main"
+            aria-busy="true"
+            aria-live="polite"
+            aria-label="Loading page content"
+        >
+            <div role="status" aria-live="polite">
+                Loading page...
+            </div>
         </main>
     )
 }
@@ -17,13 +25,37 @@ export function RouteFallback() {
 export default function AppRoutes() {
     return (
         <Suspense fallback={<RouteFallback />}>
-            <Routes>
-                <Route path="/view-campaigns" element={<App />} />
-                <Route path="/create-campaign" element={<CreateCampaign />} />
-                <Route path="/delete-campaign" element={<DeleteCampaign />} />
-                <Route path="/edit-campaign" element={<EditCampaign />} />
-                <Route path="/" element={<App />} />
-                <Route path="*" element={<Navigate to="/view-campaigns" replace />} />
+            <Routes aria-label="Campaign management navigation">
+                <Route
+                    path="/view-campaigns"
+                    element={<App />}
+                    aria-label="View all campaigns page"
+                />
+                <Route
+                    path="/create-campaign"
+                    element={<CreateCampaign />}
+                    aria-label="Create new campaign page"
+                />
+                <Route
+                    path="/delete-campaign"
+                    element={<DeleteCampaign />}
+                    aria-label="Delete campaign page"
+                />
+                <Route
+                    path="/edit-campaign"
+                    element={<EditCampaign />}
+                    aria-label="Edit campaign page"
+                />
+                <Route
+                    path="/"
+                    element={<App />}
+                    aria-label="Home page"
+                />
+                <Route
+                    path="*"
+                    element={<Navigate to="/view-campaigns" replace />}
+                    aria-label="Redirect to view campaigns"
+                />
             </Routes>
         </Suspense>
     )

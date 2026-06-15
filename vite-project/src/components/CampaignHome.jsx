@@ -8,18 +8,33 @@ function CampaignHome() {
     const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
     return (
-        <section className="board" id="board" aria-labelledby="board-title">
+        <main className="board" id="board" role="main" aria-labelledby="board-title" aria-label="Campaign dashboard">
             <CampaignBoardHeader />
 
-            <CampaignBoardMeta campaignCount={campaigns.length} isLoading={isLoading} />
+            <CampaignBoardMeta
+                campaignCount={campaigns.length}
+                isLoading={isLoading}
+                aria-label="Campaign statistics"
+            />
 
-            <p className="meta-divider">Here are your campaigns:</p>
+            <p className="meta-divider" id="campaigns-intro">
+                Here are your campaigns:
+            </p>
 
-            <CampaignBoardList campaigns={campaigns} isLoading={isLoading} />
+            <section
+                aria-labelledby="campaigns-intro"
+                aria-describedby="campaigns-description"
+            >
+                <CampaignBoardList
+                    campaigns={campaigns}
+                    isLoading={isLoading}
+                    aria-label="Marketing campaigns list"
+                />
+            </section>
 
-            <CampaignBoardOptions />
+            <CampaignBoardOptions aria-label="Campaign actions" />
 
-        </section>
+        </main>
     )
 }
 
