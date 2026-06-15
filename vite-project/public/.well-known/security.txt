@@ -1,0 +1,4 @@
+Contact: mailto:szymon.hyziak@protonmail.com
+Expires: 2027-06-14T10:59:00.000Z
+Preferred-Languages: en, pl
+Canonical: https://project-a6fcg.vercel.app/.well-known/security.txt
