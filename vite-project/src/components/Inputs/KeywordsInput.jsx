@@ -1,4 +1,4 @@
-import { keywordSuggestions } from "../CampaignTools";
+import { keywordSuggestions } from "../Form/FormTools";
 
 function KeywordsInput(props) {
     const { formData, handleChange, errors, campaigns } = props;

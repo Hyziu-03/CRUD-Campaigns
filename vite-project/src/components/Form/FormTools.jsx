@@ -1,5 +1,5 @@
-export const getKeywordSuggestions = (campaigns) => {
-    const keywordSuggestions = Array.from(
+export const keywordSuggestions = (campaigns) => {
+    const ks = Array.from(
         new Set(
             campaigns.flatMap((campaign) =>
                 String(campaign.keywords ?? '')
@@ -9,5 +9,5 @@ export const getKeywordSuggestions = (campaigns) => {
             )
         )
     );
-    return keywordSuggestions;
+    return ks;
 }

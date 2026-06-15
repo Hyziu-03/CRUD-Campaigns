@@ -1,18 +1,4 @@
-const keywordSuggestions = (campaigns) => {
-    return Array.from(
-        new Set(
-            campaigns.flatMap((campaign) => {
-                const keywords = campaign.keywords ?? '';
-                const keywordArray = Array.isArray(keywords)
-                    ? keywords
-                    : String(keywords).split(',');
-                return keywordArray
-                    .map((keyword) => String(keyword).trim())
-                    .filter(Boolean);
-            })
-        )
-    );
-}
+import { keywordSuggestions } from "../Form/FormTools";
 
 function FormEdit(props) {
     const { selectedCampaign, towns, handleEditCampaign, showEditForm, selectedCampaignId, campaigns } = props;

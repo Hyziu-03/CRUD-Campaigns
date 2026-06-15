@@ -1,6 +1,6 @@
 import CampaignBoardHeader from "../Board/CampaignBoardHeader";
 import CampaignBoardMeta from "../Board/CampaignBoardMeta";
-import CampaignForm from "../CampaignForm";
+import CampaignForm from "../Form/CampaignForm";
 import useFirestoreCollection from '../../hooks/useFirestoreCollection'
 
 function CreateCampaign() {
