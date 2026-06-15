@@ -3,8 +3,10 @@ import CampaignBoardHeader from '../Board/CampaignBoardHeader'
 import { doc, deleteDoc } from "firebase/firestore";
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 import useFirestoreCollection from '../../hooks/useFirestoreCollection'
+import { Link, useNavigate } from 'react-router';
 
 function CampaignHome() {
+    const navigate = useNavigate();
     const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
     const handleDeleteCampaign = async (event) => {
@@ -22,6 +24,7 @@ function CampaignHome() {
 
             await deleteDoc(doc(db, "campaigns", targetCampaignId));
             alert("Document deleted successfully!");
+            navigate('/view-campaigns');
         } catch (error) {
             console.error("Error deleting document: ", error);
             alert("Failed to delete campaign.");
@@ -59,13 +62,12 @@ function CampaignHome() {
             </section>
 
             <div className="board-options ">
-                <button><a className="board-option" href="/" onClick={handleDeleteCampaign}>Delete campaign</a></button>
-
-                <button>
-                    <a className="board-option" href="/view-campaigns">
-                        Cancel
-                    </a>
+                <button type="button" className="board-option" onClick={handleDeleteCampaign}>
+                    Delete campaign
                 </button>
+                <Link className="board-option" to="/view-campaigns">
+                    Cancel
+                </Link>
             </div>
         </section>
     )

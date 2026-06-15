@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import App from './App.jsx'
 
 const CreateCampaign = lazy(() => import('./components/Actions/CreateCampaign.jsx'))
@@ -23,6 +23,7 @@ export default function AppRoutes() {
                 <Route path="/delete-campaign" element={<DeleteCampaign />} />
                 <Route path="/edit-campaign" element={<EditCampaign />} />
                 <Route path="/" element={<App />} />
+                <Route path="*" element={<Navigate to="/view-campaigns" replace />} />
             </Routes>
         </Suspense>
     )

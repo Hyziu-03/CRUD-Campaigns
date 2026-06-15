@@ -3,8 +3,10 @@ import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import db from '../../Firebase-init';
 import CampaignBoardHeader from '../Board/CampaignBoardHeader';
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
+import { Link, useNavigate } from 'react-router';
 
 function CampaignHome() {
+    const navigate = useNavigate();
     const [campaigns, setCampaigns] = useState([]);
     const [towns, setTowns] = useState([]);
     const [selectedCampaignId, setSelectedCampaignId] = useState(null);
@@ -53,7 +55,7 @@ function CampaignHome() {
         }
     }
 
-    const handleEditCampaign = useCallback(() => {
+    const handleEditCampaign = useCallback((event) => {
         try {
             event.preventDefault();
 
@@ -70,10 +72,12 @@ function CampaignHome() {
                     })
                 }
             }
+
+            navigate('/view-campaigns');
         } catch (error) {
             console.error('Error editing campaign:', error);
         }
-    }, [selectedCampaignId]);
+    }, [navigate, selectedCampaignId]);
 
     const getSelectedCampaign = () => campaigns.find((campaign) => campaign.id === selectedCampaignId);
 
@@ -233,16 +237,12 @@ function CampaignHome() {
             )}
 
             <div className="board-options ">
-                <button type="button" onClick={handleEditCampaign}>
-                    <a className="board-option" href="/">
-                        Edit campaign
-                    </a>
+                <button type="button" className="board-option" onClick={handleEditCampaign}>
+                    Edit campaign
                 </button>
-                <button>
-                    <a className="board-option" href="/view-campaigns">
-                        Cancel
-                    </a>
-                </button>
+                <Link className="board-option" to="/view-campaigns">
+                    Cancel
+                </Link>
             </div>
         </section>
     );
