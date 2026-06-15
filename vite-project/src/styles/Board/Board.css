@@ -56,11 +56,6 @@
   font-weight: 700;
 }
 
-.board-option:hover {
-  background: linear-gradient(180deg, rgba(219, 234, 254, 0.95), rgba(255, 255, 255, 0.96));
-  color: #2563eb;
-}
-
 .board-button {
   margin-right: 2rem;
 }

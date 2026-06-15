@@ -150,3 +150,9 @@ textarea {
 .list-edit {
   margin: 0 auto;
 }
+
+.header-title { 
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

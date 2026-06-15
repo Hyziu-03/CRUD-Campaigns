@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Trebuchet MS", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   min-height: 100vh;
   background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 34%), radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 30%), linear-gradient(180deg, #f8fafc 0%, #eef2ff 48%, #f8fafc 100%);
   color: #1f2937;
@@ -57,7 +57,7 @@ textarea {
   padding: 0.85rem 1rem;
   display: flex;
   min-width: 0;
-  border: 1px solid rgba(31, 41, 55, 0.12);
+  border: 1px solid rgba(31, 41, 55, 0.1215686275);
   border-radius: 0.95rem;
   background: rgba(255, 255, 255, 0.9);
   color: #1f2937;
@@ -110,8 +110,8 @@ textarea {
   margin: 5rem auto 0;
   padding: 2rem;
   border-radius: 2rem;
-  border: 1px solid rgba(31, 41, 55, 0.12);
-  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(31, 41, 55, 0.1215686275);
+  background: rgba(255, 255, 255, 0.8196078431);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   text-align: center;
 }
@@ -140,4 +140,10 @@ textarea {
 
 .list-edit {
   margin: 0 auto;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }/*# sourceMappingURL=App.css.map */
