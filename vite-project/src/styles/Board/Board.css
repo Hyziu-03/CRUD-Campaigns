@@ -48,12 +48,12 @@
   padding: 0.8rem 1.1rem;
   cursor: pointer;
   text-decoration: none;
-  background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.86));
   border: 1px solid rgba(31, 41, 55, 0.1215686275);
   border-radius: 999px;
   color: #0f172a;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   font-weight: 700;
+  transition: transform 180ms ease;
 }
 
 .board-button {
@@ -69,7 +69,6 @@
   border-radius: 2rem;
   border: 1px solid rgba(31, 41, 55, 0.1215686275);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.92));
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 @media (max-width: 768px) {

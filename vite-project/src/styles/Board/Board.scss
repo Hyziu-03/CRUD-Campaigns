@@ -57,16 +57,13 @@
   padding: 0.8rem 1.1rem;
   cursor: pointer;
   text-decoration: none;
-  background: linear-gradient(
-    180deg,
-    $surfaceStrong,
-    rgba(255, 255, 255, 0.86)
-  );
+
   border: 1px solid $border;
   border-radius: 999px;
   color: $accentStrong;
   box-shadow: $shadowSoft;
   font-weight: 700;
+  transition: transform 180ms ease;
 }
 
 .board-button {
@@ -82,11 +79,7 @@
   border-radius: $radiusLarge;
   border: 1px solid $border;
   box-shadow: $shadowSoft;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.95),
-    rgba(248, 250, 252, 0.92)
-  );
+
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
