@@ -4,7 +4,7 @@ import db from '../../Firebase-init';
 import CampaignBoardHeader from '../Board/CampaignBoardHeader';
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 
-function ProductCampaignList() {
+function CampaignHome() {
     const [campaigns, setCampaigns] = useState([]);
     const [towns, setTowns] = useState([]);
     const [selectedCampaignId, setSelectedCampaignId] = useState(null);
@@ -248,4 +248,4 @@ function ProductCampaignList() {
     );
 }
 
-export default ProductCampaignList;
+export default CampaignHome;

@@ -4,7 +4,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 import useFirestoreCollection from '../../hooks/useFirestoreCollection'
 
-function ProductCampaignList() {
+function CampaignHome() {
     const { items: campaigns, isLoading } = useFirestoreCollection('campaigns')
 
     const handleDeleteCampaign = async (event) => {
@@ -71,4 +71,4 @@ function ProductCampaignList() {
     )
 }
 
-export default ProductCampaignList
+export default CampaignHome
