@@ -1,7 +1,7 @@
 import { collection, addDoc } from "firebase/firestore";
-import db from "../Firebase-init";
+import db from "../../Firebase-init";
 import { useState, useCallback } from "react";
-import { Link } from "react-router";
+import FormButtons from "./FormButtons";
 
 function CampaignForm({ towns = [], campaigns = [] }) {
     const [formData, setFormData] = useState({
@@ -26,16 +26,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
 
     const [submitStatus, setSubmitStatus] = useState(null);
 
-    const keywordSuggestions = Array.from(
-        new Set(
-            campaigns.flatMap((campaign) =>
-                String(campaign.keywords ?? '')
-                    .split(/[\s,]+/)
-                    .map((keyword) => keyword.trim())
-                    .filter(Boolean)
-            )
-        )
-    );
+    const keywordSuggestions = keywordSuggestions(campaigns);
 
     const handleChange = (e) => {
         try {
@@ -132,7 +123,7 @@ function CampaignForm({ towns = [], campaigns = [] }) {
             aria-describedby="form-description"
         >
             <fieldset>
-                <div className="form-group" role="group" aria-labelledby="name-label">
+                <section className="form-group" role="group" aria-labelledby="name-label">
                     <label id="name-label" className="list-selection" htmlFor="name">
                         Campaign name:
                     </label>
@@ -153,9 +144,9 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                             {errors.name}
                         </span>
                     )}
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="keywords-label">
+                <section className="form-group" role="group" aria-labelledby="keywords-label">
                     <label id="keywords-label" className="list-selection" htmlFor="keywords">
                         Keywords:
                     </label>
@@ -182,9 +173,9 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                             <option key={keyword} value={keyword} />
                         ))}
                     </datalist>
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="bidAmount-label">
+                <section className="form-group" role="group" aria-labelledby="bidAmount-label">
                     <label id="bidAmount-label" className="list-selection" htmlFor="bidAmount">
                         Bid amount:
                     </label>
@@ -202,15 +193,15 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                         aria-required="true"
                         required
                     />
-                    <div id="bidAmount-hint" className="hint">Must be a positive number</div>
+                    <section id="bidAmount-hint" className="hint">Must be a positive number</section>
                     {errors.bidAmount && (
                         <span id="bidAmount-error" className="error-message" role="alert" aria-live="assertive">
                             {errors.bidAmount}
                         </span>
                     )}
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="fund-label">
+                <section className="form-group" role="group" aria-labelledby="fund-label">
                     <label id="fund-label" className="list-selection" htmlFor="fund">
                         Fund:
                     </label>
@@ -228,15 +219,15 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                         aria-required="true"
                         required
                     />
-                    <div id="fund-hint" className="hint">Must be a positive number</div>
+                    <section id="fund-hint" className="hint">Must be a positive number</section>
                     {errors.fund && (
                         <span id="fund-error" className="error-message" role="alert" aria-live="assertive">
                             {errors.fund}
                         </span>
                     )}
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="town-label">
+                <section className="form-group" role="group" aria-labelledby="town-label">
                     <label id="town-label" className="list-selection" htmlFor="town">
                         Town:
                     </label>
@@ -262,9 +253,9 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                             {errors.town}
                         </span>
                     )}
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="radius-label">
+                <section className="form-group" role="group" aria-labelledby="radius-label">
                     <label id="radius-label" className="list-selection" htmlFor="radius">
                         Radius (km):
                     </label>
@@ -282,15 +273,15 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                         aria-required="true"
                         required
                     />
-                    <div id="radius-hint" className="hint">Must be a positive integer</div>
+                    <section id="radius-hint" className="hint">Must be a positive integer</section>
                     {errors.radius && (
                         <span id="radius-error" className="error-message" role="alert" aria-live="assertive">
                             {errors.radius}
                         </span>
                     )}
-                </div>
+                </section>
 
-                <div className="form-group" role="group" aria-labelledby="status-label">
+                <section className="form-group" role="group" aria-labelledby="status-label">
                     <label id="status-label" className="list-selection" htmlFor="status">
                         Status:
                     </label>
@@ -310,32 +301,10 @@ function CampaignForm({ towns = [], campaigns = [] }) {
                             {errors.status}
                         </span>
                     )}
-                </div>
+                </section>
             </fieldset>
 
-            <div
-                className="board-options"
-                role="toolbar"
-                aria-label="Form actions"
-            >
-                <button
-                    type="submit"
-                    aria-label="Save campaign"
-                    aria-describedby="submit-status"
-                    disabled={submitStatus === 'submitting'}
-                >
-                    <span className="board-option">Save campaign</span>
-                </button>
-                <Link
-                    className="board-option"
-                    to="/view-campaigns"
-                    role="button"
-                    aria-label="Cancel and return to campaigns list"
-                >
-                    Cancel
-                </Link>
-            </div>
-
+            <FormButtons submitStatus={submitStatus} />
         </form>
     );
 }

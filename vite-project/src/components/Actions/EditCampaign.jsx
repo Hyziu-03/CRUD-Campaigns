@@ -4,6 +4,8 @@ import db from '../../Firebase-init';
 import CampaignBoardHeader from '../Board/CampaignBoardHeader';
 import CampaignBoardMeta from '../Board/CampaignBoardMeta';
 import { Link, useNavigate } from 'react-router';
+import { selectedCampaign } from '../CampaignTools';
+import FormEdit from '../Form/FormEdit';
 
 function CampaignHome() {
     const navigate = useNavigate();
@@ -94,22 +96,6 @@ function CampaignHome() {
         }
     }, [navigate, selectedCampaignId]);
 
-    const getSelectedCampaign = () => campaigns.find((campaign) => campaign.id === selectedCampaignId);
-    const selectedCampaign = getSelectedCampaign();
-
-    const keywordSuggestions = Array.from(
-        new Set(
-            campaigns.flatMap((campaign) => {
-                const keywords = campaign.keywords ?? '';
-                const keywordArray = Array.isArray(keywords)
-                    ? keywords
-                    : String(keywords).split(',');
-                return keywordArray
-                    .map((keyword) => String(keyword).trim())
-                    .filter(Boolean);
-            })
-        )
-    );
 
     return (
         <section className="board" id="board" aria-labelledby="board-title">
@@ -125,9 +111,9 @@ function CampaignHome() {
             </p>
 
             {error && (
-                <div role="alert" aria-live="assertive" className="error-message">
+                <section role="alert" aria-live="assertive" className="error-message">
                     {error}
-                </div>
+                </section>
             )}
 
             <section aria-labelledby="selection-instruction">
@@ -154,163 +140,18 @@ function CampaignHome() {
                         ))}
                     </ul>
                 ) : (
-                    <div className="empty" role="status" aria-live="polite">
+                    <section className="empty" role="status" aria-live="polite">
                         <h2 id="no-campaigns-heading">No campaigns yet</h2>
                         <p aria-describedby="no-campaigns-heading">
                             Firestore returned an empty campaigns collection.
                         </p>
-                    </div>
+                    </section>
                 )}
             </section>
 
-            {showEditForm && selectedCampaignId && (
-                <section aria-labelledby="edit-form-heading">
-                    <h2 id="edit-form-heading">Edit Campaign Form</h2>
-                    <ul className="list list-edit" role="list">
-                        <form className="board-form" onSubmit={handleEditCampaign} aria-labelledby="edit-form-heading">
-                            <label className="list-label">
-                                <p className="list-selection" id="current-name">
-                                    Current name: {selectedCampaign?.name}
-                                </p>
-                                <p className="list-selection-edit" id="new-name-desc">
-                                    New name (leave blank to keep current value):
-                                </p>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Spring launch push"
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-name new-name-desc"
-                                    aria-label="New campaign name"
-                                />
-                            </label>
+            <FormEdit selectedCampaign={selectedCampaign} towns={towns} handleEditCampaign={handleEditCampaign} showEditForm={showEditForm} selectedCampaignId={selectedCampaignId} campaigns={campaigns} />
 
-                            <label className="list-label">
-                                <p className="list-selection" id="current-keywords">
-                                    Current keywords: {selectedCampaign?.keywords?.split(" ")?.join(", ") || 'None'}
-                                </p>
-                                <p className="list-selection-edit" id="new-keywords-desc">
-                                    New keywords (leave blank to keep current value):
-                                </p>
-                                <input
-                                    type="text"
-                                    name="keywords"
-                                    placeholder="summer launch bundle"
-                                    defaultValue={selectedCampaign?.keywords ?? ''}
-                                    className="form-input board-edit-input"
-                                    list="keyword-suggestions"
-                                    aria-describedby="current-keywords new-keywords-desc"
-                                    aria-label="New campaign keywords"
-                                />
-                            </label>
-
-                            <label className="list-label">
-                                <p className="list-selection" id="current-bid">
-                                    Current bid amount: {selectedCampaign?.bidAmount}
-                                </p>
-                                <p className="list-selection-edit" id="new-bid-desc">
-                                    New bid amount (leave blank to keep current value):
-                                </p>
-                                <input
-                                    type="number"
-                                    name="bidAmount"
-                                    placeholder="1000"
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-bid new-bid-desc"
-                                    aria-label="New bid amount"
-                                />
-                            </label>
-
-                            <label className="list-label">
-                                <p className="list-selection" id="current-fund">
-                                    Current fund: {selectedCampaign?.fund}
-                                </p>
-                                <p className="list-selection-edit" id="new-fund-desc">
-                                    New fund (leave blank to keep current value):
-                                </p>
-                                <input
-                                    type="number"
-                                    name="fund"
-                                    placeholder="5000"
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-fund new-fund-desc"
-                                    aria-label="New fund amount"
-                                />
-                            </label>
-
-                            <label className="list-label">
-                                <p className="list-selection" id="current-town">
-                                    Current town: {selectedCampaign?.town}
-                                </p>
-                                <p className="list-selection-edit" id="new-town-desc">
-                                    New town (leave blank to keep current value):
-                                </p>
-                                <select
-                                    name="town"
-                                    defaultValue={selectedCampaign?.town}
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-town new-town-desc"
-                                    aria-label="New town"
-                                >
-                                    {towns.map((town) => (
-                                        <option key={town.name} value={town.name}>
-                                            {town.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-
-                            <label className="list-label">
-                                <p className="list-selection" id="current-radius">
-                                    Current radius: {selectedCampaign?.radius}
-                                </p>
-                                <p className="list-selection-edit" id="new-radius-desc">
-                                    New radius (leave blank to keep current value):
-                                </p>
-                                <input
-                                    type="number"
-                                    name="radius"
-                                    placeholder="10"
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-radius new-radius-desc"
-                                    aria-label="New radius"
-                                />
-                            </label>
-
-                            <label className="list-label">
-                                <p className="list-selection" id="current-status">
-                                    Current status: {selectedCampaign?.status}
-                                </p>
-                                <p className="list-selection-edit" id="new-status-desc">
-                                    New status:
-                                </p>
-                                <select
-                                    name="status"
-                                    defaultValue={selectedCampaign?.status || "scheduled"}
-                                    className="form-input board-edit-input"
-                                    aria-describedby="current-status new-status-desc"
-                                    aria-label="New status"
-                                >
-                                    <option value="on">On</option>
-                                    <option value="off">Off</option>
-                                </select>
-                            </label>
-
-                            <button type="submit" className="board-option" aria-label="Save campaign changes">
-                                Save Changes
-                            </button>
-                        </form>
-
-                        <datalist id="keyword-suggestions" aria-label="Keyword suggestions">
-                            {keywordSuggestions.map((keyword) => (
-                                <option key={keyword} value={keyword} />
-                            ))}
-                        </datalist>
-                    </ul>
-                </section>
-            )}
-
-            <div className="board-options" role="toolbar" aria-label="Campaign actions">
+            <section className="board-options" role="toolbar" aria-label="Campaign actions">
                 <button
                     type="button"
                     className="board-option"
@@ -328,7 +169,7 @@ function CampaignHome() {
                 >
                     Cancel
                 </Link>
-            </div>
+            </section>
         </section>
     );
 }
